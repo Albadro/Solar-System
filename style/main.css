@@ -1,10 +1,68 @@
 /* ever nesiting level (child or parent) have a reason to exist, and if you wounder if there is any nesting in the html structure that might seem to be useless, it is to maintain `transform`, prevent its overriding and avoind repeating its functions!  */
+
+/*  */
+/* animation */
+/*  */
+@keyframes orbit {
+    /* rotate around */
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes facing {
+    /*object stay facing while orbitting */
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+/*  */
+/*  */
+
 :root {
     --net-slope: 70deg;
     --stand-slope: -90deg;
-    /* `--object-od` means object Orbit Duration */
-    --earth-od: 10000ms; /* 10s */
-    --moon-od: 1000ms; /* 1s */
+    --net-scale: 1.4%;
+    /* Realistic scaling of planetary sizes and orbits in em */
+
+    /* `--object-w` = object Width */
+    --sun-w: 109em; /* Sun is 109 times Earth's diameter */
+
+    /* Planet sizes (scaled relative to Earth's diameter of 1em) */
+    --mercury-w: 0.38em;
+    --venus-w: 0.95em;
+    --earth-w: 1em;
+    --mars-w: 0.53em;
+    --jupiter-w: 11.2em;
+    --saturn-w: 9.45em;
+    --uranus-w: 4em;
+    --neptune-w: 3.88em;
+
+    /* `--object-ow` = object Orbit Width */
+    --mercury-ow: 77.8em; /* 0.39 AU */
+    --venus-ow: 149.6em; /* 0.72 AU */
+    --earth-ow: 200em; /* 1 AU */
+    --mars-ow: 305.4em; /* 1.52 AU */
+    --jupiter-ow: 1040em; /* 5.2 AU */
+    --saturn-ow: 1900em; /* 9.5 AU */
+    --uranus-ow: 3800em; /* 19 AU */
+    --neptune-ow: 6006em; /* 30 AU */
+
+    /* `--object-od` = object Orbit Duration */
+    --mercury-od: 8800ms;
+    --venus-od: 22500ms;
+    --earth-od: 36500ms;
+    --mars-od: 68700ms;
+    --jupiter-od: 433300ms;
+    --saturn-od: 1076000ms;
+    --uranus-od: 3069000ms;
+    --neptune-od: 6019000ms;
 }
 body,
 html {
@@ -41,10 +99,12 @@ main {
     /* preserving 3D mode over layers */
     transform-style: preserve-3d;
 }
+/* the .object-box element has both the classes `orbit` & `[planetname]` */
 .net {
     /* the virtual net that caries the objects */
     position: relative;
     transform: rotateX(var(--net-slope));
+    font-size: var(--net-scale); /* the scaling of the whole thing */
 }
 .object-box {
     /* centerlizing every object */
@@ -60,7 +120,7 @@ main {
 .orbit {
     /* drawing orbits */
     border-radius: 50%;
-    border: solid #4e5961 2px;
+    border: solid #4e5961 calc(1em / 16);
 }
 .orbitor {
     /* rotating what is inside `.orbit`*/
@@ -97,55 +157,111 @@ main {
     height: 10em;
     background-color: gold;
 }
-/* earth */
-.earth.orbit {
-    --od: var(--earth-od);
-    width: 30em;
-    height: 30em;
+
+/* Mercury */
+.mercury.orbit {
+    --od: var(--mercury-od);
+    width: var(--mercury-ow);
+    height: var(--mercury-ow);
 }
-#earth {
-    width: 5em;
-    height: 5em;
-    background-color: blue;
+#mercury {
+    width: var(--mercury-w);
+    height: var(--mercury-w);
+    background-color: gray;
 }
 
+/* Venus */
+.venus.orbit {
+    --od: var(--venus-od);
+    width: var(--venus-ow);
+    height: var(--venus-ow);
+}
+#venus {
+    width: var(--venus-w);
+    height: var(--venus-w);
+    background-color: yellow;
+}
+
+/* Earth */
+.earth.orbit {
+    --od: var(--earth-od);
+    width: var(--earth-ow);
+    height: var(--earth-ow);
+}
+#earth {
+    width: var(--earth-w);
+    height: var(--earth-w);
+    background-color: blue;
+}
+/* moon */
+/* earth */
 .moon.orbit {
     --od: var(--moon-od);
-    width: 10em;
-    height: 10em;
+    width: var(--moon-ow);
+    height: var(--moon-ow);
 }
 #moon {
-    width: 1em;
-    height: 1em;
+    width: var(--moon-w);
+    height: var(--moon-w);
     background-color: grey;
 }
 
-/* animation */
-@keyframes orbit {
-    /* rotate around */
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+/* Mars */
+.mars.orbit {
+    --od: var(--mars-od);
+    width: var(--mars-ow);
+    height: var(--mars-ow);
 }
-@keyframes facing {
-    /*object stay facing while orbitting */
-    0% {
-        transform: rotateY(0deg);
-    }
-    100% {
-        transform: rotateY(360deg);
-    }
+#mars {
+    width: var(--mars-w);
+    height: var(--mars-w);
+    background-color: red;
 }
 
-.earth > .orbitor {
-    background-color: #f00;
+/* Jupiter */
+.jupiter.orbit {
+    --od: var(--jupiter-od);
+    width: var(--jupiter-ow);
+    height: var(--jupiter-ow);
 }
-.moon > .orbitor {
-    background-color: #0f0;
+#jupiter {
+    width: var(--jupiter-w);
+    height: var(--jupiter-w);
+    background-color: orange;
 }
-.moon {
-    left: 0;
+
+/* Saturn */
+.saturn.orbit {
+    --od: var(--saturn-od);
+    width: var(--saturn-ow);
+    height: var(--saturn-ow);
+}
+#saturn {
+    width: var(--saturn-w);
+    height: var(--saturn-w);
+    background-color: tan;
+}
+
+/* Uranus */
+.uranus.orbit {
+    --od: var(--uranus-od);
+    width: var(--uranus-ow);
+    height: var(--uranus-ow);
+}
+#uranus {
+    width: var(--uranus-w);
+    height: var(--uranus-w);
+    background-color: lightblue;
+}
+
+/* Neptune */
+.neptune.orbit {
+    --od: var(--neptune-od);
+    width: var(--neptune-ow);
+    height: var(--neptune-ow);
+}
+#neptune {
+    width: var(--neptune-w);
+    height: var(--neptune-w);
+    background-color: darkblue;
 }
