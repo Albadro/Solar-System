@@ -7,18 +7,35 @@
         <link rel="stylesheet" href="style/main.css" />
     </head>
     <body>
+        <!-- the multy nesting is to maintain the animations and prevent `transform` property overriding -->
         <main>
             <div class="net">
-                <div class="object-box earth">
-                    <div class="stand">
-                        <div id="earth" class="object"></div>
+                <!-- Sun -->
+                <div class="object-box sun">
+                    <div class="stand sun">
+                        <div id="sun" class="object"></div>
                     </div>
                 </div>
-
-                <div class="object-box moon orbit">
+                <!-- Earth -->
+                <div class="object-box orbit earth">
                     <div class="orbitor">
-                        <div class="stand">
-                            <div id="moon" class="object"></div>
+                        <!-- moon -->
+                        <div class="sub-object">
+                            <div class="object-box orbit moon">
+                                <div class="orbitor">
+                                    <div class="orbited">
+                                        <div class="stand">
+                                            <div id="moon" class="object"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- moon end -->
+                        <div class="orbited">
+                            <div class="stand">
+                                <div id="earth" class="object"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

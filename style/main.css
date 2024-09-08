@@ -1,6 +1,10 @@
+/* ever nesiting level (child or parent) have a reason to exist, and if you wounder if there is any nesting in the html structure that might seem to be useless, it is to maintain `transform`, prevent its overriding and avoind repeating its functions!  */
 :root {
     --net-slope: 70deg;
     --stand-slope: -90deg;
+    /* `--object-od` means object Orbit Duration */
+    --earth-od: 10000ms; /* 10s */
+    --moon-od: 1000ms; /* 1s */
 }
 body,
 html {
@@ -28,66 +32,92 @@ main {
     justify-content: center;
     align-items: center;
 }
-.net {
-    position: relative;
+.net,
+.object-box,
+.sub-object,
+.orbitor,
+.orbited,
+.stand {
+    /* preserving 3D mode over layers */
     transform-style: preserve-3d;
+}
+.net {
+    /* the virtual net that caries the objects */
+    position: relative;
     transform: rotateX(var(--net-slope));
 }
-/* net children */
-.net > * {
+.object-box {
+    /* centerlizing every object */
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-/* general */
-.object-box,
-.orbitor,
-.stand {
-    transform-style: preserve-3d;
+.sub-object {
+    /* to apply only the orbitting of hte sub-object (moon) //reverting the orbiting of the parent */
+    animation: orbit var(--od) linear infinite reverse;
 }
 .orbit {
+    /* drawing orbits */
     border-radius: 50%;
     border: solid #4e5961 2px;
-    background-color: red;
 }
 .orbitor {
+    /* rotating what is inside `.orbit`*/
     width: 100%;
     height: 100%;
-    animation: orbit 5s linear infinite;
+    animation: orbit var(--od) linear infinite;
     display: flex;
+    align-items: center;
+}
+.orbited {
+    /* making the orbit line in the middle of the object */
+    transform: translateX(-50%);
 }
 .stand {
+    /* standing the object up  */
     transform: rotateX(var(--stand-slope));
-    background-color: yellow;
     height: min-content;
 }
 .object {
     border-radius: 50%;
+    .orbited & {
+        /* keep the object facing while orbitting */
+        animation: facing var(--od) linear infinite;
+        /* animation-name: facing;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite; */
+    }
 }
 /*  */
 /* objects */
 /*  */
+#sun {
+    width: 10em;
+    height: 10em;
+    background-color: gold;
+}
 /* earth */
-.earth .stand {
-    opacity: 0.6;
+.earth.orbit {
+    --od: var(--earth-od);
+    width: 30em;
+    height: 30em;
 }
 #earth {
-    width: 100px;
-    height: 100px;
+    width: 5em;
+    height: 5em;
     background-color: blue;
 }
 
-/* moon */
 .moon.orbit {
-    width: 200px;
-    height: 200px;
+    --od: var(--moon-od);
+    width: 10em;
+    height: 10em;
 }
 #moon {
-    width: 50px;
-    height: 50px;
+    width: 1em;
+    height: 1em;
     background-color: grey;
-    animation: facing 5s linear infinite;
 }
 
 /* animation */
@@ -108,4 +138,14 @@ main {
     100% {
         transform: rotateY(360deg);
     }
+}
+
+.earth > .orbitor {
+    background-color: #f00;
+}
+.moon > .orbitor {
+    background-color: #0f0;
+}
+.moon {
+    left: 0;
 }
