@@ -28,36 +28,37 @@
 :root {
     --net-slope: 70deg;
     --stand-slope: -90deg;
-    --net-scale: 1.4%;
+    --net-scale: 80%;
     /* Realistic scaling of planetary sizes and orbits in em */
 
     /* `--object-w` = object Width */
-    --sun-w: 109em; /* Sun is 109 times Earth's diameter */
-
-    /* Planet sizes (scaled relative to Earth's diameter of 1em) */
-    --mercury-w: 0.38em;
-    --venus-w: 0.95em;
-    --earth-w: 1em;
-    --mars-w: 0.53em;
-    --jupiter-w: 11.2em;
-    --saturn-w: 9.45em;
-    --uranus-w: 4em;
-    --neptune-w: 3.88em;
+    --sun-w: 20em;
+    --mercury-w: 1.2em;
+    --venus-w: 2.4em;
+    --earth-w: 3em;
+    --moon-w: 0.6em;
+    --mars-w: 1.8em;
+    --jupiter-w: 6.4em;
+    --saturn-w: 5.8em;
+    --uranus-w: 4.2em;
+    --neptune-w: 4em;
 
     /* `--object-ow` = object Orbit Width */
-    --mercury-ow: 77.8em; /* 0.39 AU */
-    --venus-ow: 149.6em; /* 0.72 AU */
-    --earth-ow: 200em; /* 1 AU */
-    --mars-ow: 305.4em; /* 1.52 AU */
-    --jupiter-ow: 1040em; /* 5.2 AU */
-    --saturn-ow: 1900em; /* 9.5 AU */
-    --uranus-ow: 3800em; /* 19 AU */
-    --neptune-ow: 6006em; /* 30 AU */
+    --mercury-ow: 13em;
+    --venus-ow: calc(var(--mercury-ow) + 5em);
+    --earth-ow: calc(var(--venus-ow) + 7em);
+    --moon-ow: 4em;
+    --mars-ow: calc(var(--earth-ow) + 10em);
+    --jupiter-ow: calc(var(--mars-ow) + 16em);
+    --saturn-ow: calc(var(--jupiter-ow) + 15em);
+    --uranus-ow: calc(var(--saturn-ow) + 15em);
+    --neptune-ow: calc(var(--uranus-ow) + 15em);
 
     /* `--object-od` = object Orbit Duration */
     --mercury-od: 8800ms;
     --venus-od: 22500ms;
     --earth-od: 36500ms;
+    --moon-od: 2950ms;
     --mars-od: 68700ms;
     --jupiter-od: 433300ms;
     --saturn-od: 1076000ms;
@@ -155,7 +156,7 @@ main {
 #sun {
     width: 10em;
     height: 10em;
-    background-color: gold;
+    background-color: yellow;
 }
 
 /* Mercury */
@@ -179,7 +180,7 @@ main {
 #venus {
     width: var(--venus-w);
     height: var(--venus-w);
-    background-color: yellow;
+    background-color: gold;
 }
 
 /* Earth */
