@@ -29,7 +29,6 @@
     --net-slope: 70deg;
     --stand-slope: -90deg;
     --net-scale: 80%;
-    /* Realistic scaling of planetary sizes and orbits in em */
 
     /* `--object-w` = object Width */
     --sun-w: 20em;
@@ -76,7 +75,9 @@ body {
 }
 html,
 body,
-body > * {
+body > *,
+body > *::after,
+body > *::before {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -117,6 +118,7 @@ main {
 .sub-object {
     /* to apply only the orbitting of hte sub-object (moon) //reverting the orbiting of the parent */
     animation: orbit var(--od) linear infinite reverse;
+    animation-fill-mode: none;
 }
 .orbit {
     /* drawing orbits */
@@ -128,6 +130,7 @@ main {
     width: 100%;
     height: 100%;
     animation: orbit var(--od) linear infinite;
+    animation-fill-mode: none;
     display: flex;
     align-items: center;
 }
@@ -142,13 +145,11 @@ main {
 }
 .object {
     border-radius: 50%;
-    .orbited & {
-        /* keep the object facing while orbitting */
-        animation: facing var(--od) linear infinite;
-        /* animation-name: facing;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite; */
-    }
+}
+.orbited .object {
+    /* keep the object facing while orbitting */
+    animation: facing var(--od) linear infinite;
+    animation-fill-mode: none;
 }
 /*  */
 /* objects */
@@ -274,15 +275,71 @@ header {
     width: 100%;
     height: 50px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding-inline: 1em;
     text-transform: capitalize;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
+/* day conter */
 header > .day-counter {
     letter-spacing: 1px;
     & > span {
         display: inline-block;
         transform: translateY(0.085em);
     }
+}
+/* 2d switch */
+label.d-switch {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+}
+input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    margin: 0;
+}
+label.r {
+    display: block;
+    position: relative;
+    width: 1.2em;
+    height: 1em;
+    margin-inline: 0.4em;
+}
+label.r:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: calc(100% - 13px);
+    transform: translateY(-50%);
+    width: 13px;
+    height: 13px;
+    background: #fff;
+    border-radius: 10%;
+    transition-property: right, box-shadow, transform;
+    transition-duration: 0.3s;
+    box-shadow: 1px 2.5px hsl(0, 0%, 45%);
+    cursor: pointer;
+}
+input:checked + label.r:after {
+    right: 0;
+    transform: translateY(calc(-50% + 1px));
+    box-shadow: none;
+}
+.net,
+.stand {
+    transition: transform 2000ms;
+}
+.net.d2 {
+    --net-slope: 0deg;
+    --stand-slope: 0deg;
+    & .object {
+        animation: none;
+    }
+}
+.net.freeze * {
+    animation: none;
 }

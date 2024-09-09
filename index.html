@@ -9,10 +9,16 @@
     <body>
         <header>
             <div class="day-counter">day: <span id="currentDay">0</span></div>
+            <label for="switch" class="d-switch" id="DswitchBox">
+                <span>3D</span>
+                <input type="checkbox" id="Dswitch" />
+                <label class="r" for="Dswitch"></label>
+                <span>2D</span>
+            </label>
         </header>
         <main>
             <!-- the multy nesting is to maintain the animations and prevent `transform` property overriding -->
-            <div class="net">
+            <div class="net" id="net">
                 <!-- Sun -->
                 <div class="object-box sun">
                     <div class="stand sun">
