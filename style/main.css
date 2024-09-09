@@ -151,13 +151,31 @@ main {
     animation: facing var(--od) linear infinite;
     animation-fill-mode: none;
 }
+#sun,
+#mercury,
+#venus,
+#moon,
+#jupiter,
+#uranus {
+    background-size: 125%;
+    background-position: 50% 55%;
+}
+#mars,
+#saturn,
+#neptune {
+    background-size: cover;
+    background-position: 50% 55%;
+}
 /*  */
 /* objects */
 /*  */
 #sun {
     width: 10em;
     height: 10em;
-    background-color: yellow;
+    /* background-color: yellow; */
+    background-image: url(../imgs/sun.png);
+
+    box-shadow: 0 0 100px #f6831a, 0 0 1000px #f6831a, 0 0 10000px #fff;
 }
 
 /* Mercury */
@@ -169,7 +187,7 @@ main {
 #mercury {
     width: var(--mercury-w);
     height: var(--mercury-w);
-    background-color: gray;
+    background-image: url(../imgs/mercury.png);
 }
 
 /* Venus */
@@ -181,7 +199,7 @@ main {
 #venus {
     width: var(--venus-w);
     height: var(--venus-w);
-    background-color: gold;
+    background-image: url(../imgs/venus.png);
 }
 
 /* Earth */
@@ -193,10 +211,11 @@ main {
 #earth {
     width: var(--earth-w);
     height: var(--earth-w);
-    background-color: blue;
+    /* background-color: blue; */
+    background-image: url(../imgs/earth.png);
+    background-size: contain;
 }
 /* moon */
-/* earth */
 .moon.orbit {
     --od: var(--moon-od);
     width: var(--moon-ow);
@@ -205,7 +224,7 @@ main {
 #moon {
     width: var(--moon-w);
     height: var(--moon-w);
-    background-color: grey;
+    background-image: url(../imgs/moon.png);
 }
 
 /* Mars */
@@ -217,7 +236,7 @@ main {
 #mars {
     width: var(--mars-w);
     height: var(--mars-w);
-    background-color: red;
+    background-image: url(../imgs/mars.png);
 }
 
 /* Jupiter */
@@ -229,7 +248,7 @@ main {
 #jupiter {
     width: var(--jupiter-w);
     height: var(--jupiter-w);
-    background-color: orange;
+    background-image: url(../imgs/jupiter.png);
 }
 
 /* Saturn */
@@ -241,7 +260,7 @@ main {
 #saturn {
     width: var(--saturn-w);
     height: var(--saturn-w);
-    background-color: tan;
+    background-image: url(../imgs/saturn.png);
 }
 
 /* Uranus */
@@ -253,7 +272,7 @@ main {
 #uranus {
     width: var(--uranus-w);
     height: var(--uranus-w);
-    background-color: lightblue;
+    background-image: url(../imgs/uranus.png);
 }
 
 /* Neptune */
@@ -265,7 +284,7 @@ main {
 #neptune {
     width: var(--neptune-w);
     height: var(--neptune-w);
-    background-color: darkblue;
+    background-image: url(../imgs/neptune.png);
 }
 
 /*  */
